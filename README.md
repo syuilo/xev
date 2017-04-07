@@ -17,8 +17,10 @@ $ npm install xev --save
 Usage
 ----------------------------------------------------------------
 It is the same as using [EventEmitter](https://nodejs.org/api/events.html).
+**But all events are shared globally.**
 
 ### Simple usage
+File A:
 ``` javascript
 import Xev from 'xev';
 
@@ -27,6 +29,13 @@ const ev = new Xev();
 ev.on('my-event', message => {
 	console.log(`message received: ${message}`);
 });
+```
+
+File B:
+``` javascript
+import Xev from 'xev';
+
+const ev = new Xev();
 
 ev.emit('my-event', 'yo'); // <= 'message received: yo'
 ```
@@ -47,6 +56,27 @@ if (isMaster) {
 	// your worker code
 }
 ```
+
+Worker A:
+``` javascript
+import Xev from 'xev';
+
+const ev = new Xev();
+
+ev.on('my-event', message => {
+	console.log(`message received: ${message}`);
+});
+```
+
+Worker B:
+``` javascript
+import Xev from 'xev';
+
+const ev = new Xev();
+
+ev.emit('my-event', 'yo'); // <= 'message received: yo'
+```
+
 Technically, Node.js **cannot** workers to communicate directly
 with each other - all communication goes via the master.
 So, you must be call our `mount` initialize function.
