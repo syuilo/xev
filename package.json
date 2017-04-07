@@ -1,0 +1,24 @@
+{
+  "name": "xev",
+  "version": "0.0.0",
+  "description": "Global event emitter",
+  "keywords": [
+    "event",
+    "cluster",
+    "messaging"
+  ],
+  "author": "syuilo",
+  "license": "MIT",
+  "repository": "https://github.com/syuilo/xev.git",
+  "bugs": "https://github.com/syuilo/xev/issues",
+  "main": "./built/index.js",
+  "types": "./built/index.d.ts",
+  "devDependencies": {
+    "@types/event-stream": "3.3.31",
+    "@types/gulp": "4.0.2",
+    "@types/gulp-typescript": "0.0.33",
+    "event-stream": "3.3.4",
+    "gulp": "3.9.1",
+    "gulp-typescript": "3.1.6"
+  }
+}
