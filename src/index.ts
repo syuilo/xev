@@ -37,7 +37,7 @@ export default class Xev {
 		// When receiving a message from workers
 		cluster.on('message', (_, message) => broadcast(message));
 		// When receiving a message from the master
-		process.on('message', broadcast);
+		process.on('message', broadcast.bind(this));
 
 		function broadcast(message) {
 			// Ignore third party messages
