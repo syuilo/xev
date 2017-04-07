@@ -48,7 +48,7 @@ So, you must be call our `mount` initialize function.
 Good luck, have fun.
 
 API
----------------------------------------------------------------
+----------------------------------------------------------------
 ### new Xev(namespace?)
 If you are a library developer, we recommend setting namespace
 to avoid conflicts with events of users or other libraries:
