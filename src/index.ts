@@ -24,7 +24,7 @@ export default class Xev {
 	}
 
 	/**
-	 * Mount event system
+	 * Mount event system.
 	 * This method must be called in the master process.
 	 */
 	public mount(): void {
@@ -51,8 +51,8 @@ export default class Xev {
 
 	/**
 	 * Publish event
-	 * @param type Event name
-	 * @param data Event data
+	 * @param type The name of the event
+	 * @param data The payload of the event
 	 */
 	public pub(type: string, data: any): void {
 		const message = { type, data, namespace: this.namespace };
@@ -66,10 +66,10 @@ export default class Xev {
 
 	/**
 	 * Subscribe event
-	 * @param type Event name
-	 * @param handler Event handler
+	 * @param type     The name of the event
+	 * @param listener The callback function
 	 */
-	public sub(type: string, handler: (data: any) => any): void {
+	public sub(type: string, listener: (data: any) => any): void {
 		process.on('message', message => {
 			// Ignore third party messages
 			if (message.namespace != this.namespace) return;
@@ -77,7 +77,7 @@ export default class Xev {
 			// Ignore other event
 			if (message.type != type) return;
 
-			handler(message.data);
+			listener(message.data);
 		});
 	}
 }
