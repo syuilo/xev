@@ -5,6 +5,7 @@
  */
 
 import * as cluster from 'cluster';
+import autobind from './autobind';
 
 /**
  * Global Event Emitter
@@ -27,6 +28,7 @@ export default class Xev {
 	 * Mount event system.
 	 * This method must be called in the master process.
 	 */
+	@autobind
 	public mount(): void {
 		if (cluster.isWorker) {
 			throw 'Do not call this method in a worker process.';
@@ -54,6 +56,7 @@ export default class Xev {
 	 * @param type The name of the event
 	 * @param data The payload of the event
 	 */
+	@autobind
 	public pub(type: string, data?: any): void {
 		const message = { type, data, namespace: this.namespace };
 
@@ -77,6 +80,7 @@ export default class Xev {
 	 */
 	public sub(listener: (type: string, data: any) => any): void;
 
+	@autobind
 	public sub(x, y?): void {
 		process.on('message', message => {
 			// Ignore third party messages
