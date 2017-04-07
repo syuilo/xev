@@ -4,27 +4,18 @@
  * MIT Licensed
  */
 
+import { EventEmitter } from 'events';
 import * as cluster from 'cluster';
 import autobind from './autobind';
 
 /**
  * Global Event Emitter
  */
-export default class Xev {
+export default class Xev extends EventEmitter {
 	/**
 	 * Namespace
 	 */
 	public namespace: string;
-
-	/**
-	 * All listeners
-	 */
-	private listeners: { [event: string]: Function[] } = {};
-
-	/**
-	 * Whether is listening process messages
-	 */
-	private isListening: boolean = false;
 
 	/**
 	 * Whether is mounted
@@ -36,7 +27,12 @@ export default class Xev {
 	 * @param namespace Namespace
 	 */
 	constructor(namespace?: string) {
+		super();
 		this.namespace = namespace;
+
+		//this.once('newListener', () => {
+			process.addListener('message', this.onMessage);
+		//});
 	}
 
 	/**
@@ -44,10 +40,9 @@ export default class Xev {
 	 */
 	@autobind
 	public dispose() {
-		this.listeners = {};
+		this.removeAllListeners();
 
 		process.removeListener('message', this.onMessage);
-		this.isListening = false;
 
 		if (this.isMounted) {
 			cluster.removeListener('message', this.onClusterMessageInMaster);
@@ -61,17 +56,8 @@ export default class Xev {
 		// Ignore third party messages
 		if (message.namespace != this.namespace) return;
 
-		// Call all wild listeners
-		const wildListeners = this.listeners['*'] || [];
-		wildListeners.forEach(listener => {
-			listener(message.type, message.data);
-		});
-
-		// Call all named listeners
-		const namedListeners = this.listeners[message.type] || [];
-		namedListeners.forEach(listener => {
-			listener(message.data);
-		});
+		super.emit('*', message.type, message.data);
+		super.emit(message.type, message.data);
 	}
 
 	/**
@@ -127,9 +113,10 @@ export default class Xev {
 	 * Publish event
 	 * @param type The name of the event
 	 * @param data The payload of the event
+	 * @return Always true
 	 */
 	@autobind
-	public pub(type: string, data?: any): void {
+	public emit(type: string, data?: any): boolean {
 		const message = { type, data,
 			namespace: this.namespace };
 
@@ -138,68 +125,7 @@ export default class Xev {
 		} else {
 			process.send(message);
 		}
-	}
 
-	/**
-	 * Subscribe event
-	 * @param type     The name of the event
-	 * @param listener The callback function
-	 */
-	public sub(type: string, listener: (data: any) => any): void;
-
-	/**
-	 * Subscribe all events
-	 * @param listener The callback function
-	 */
-	public sub(listener: (type: string, data: any) => any): void;
-
-	@autobind
-	public sub(x, y?): void {
-		const type = typeof x == 'function' ? null : x;
-		const listener = typeof x == 'function' ? x : y;
-
-		const key = type || '*';
-
-		// For first listen
-		if (!this.listeners.hasOwnProperty(key)) {
-			this.listeners[key] = [];
-		}
-
-		// Register listener
-		this.listeners[key].push(listener);
-
-		// Start listen if still not listening
-		if (!this.isListening) {
-			this.isListening = true;
-			process.addListener('message', this.onMessage);
-		}
-	}
-
-	/**
-	 * Unsubscribe event
-	 * @param type     The name of the event
-	 * @param listener The callback function
-	 */
-	public unsub(type: string, listener: (data: any) => any): void;
-
-	/**
-	 * Unsubscribe all events
-	 * @param listener The callback function
-	 */
-	public unsub(listener: (type: string, data: any) => any): void;
-
-	@autobind
-	public unsub(x, y?): void {
-		const type = typeof x == 'function' ? null : x;
-		const listener = typeof x == 'function' ? x : y;
-
-		const key = type || '*';
-
-		const listeners = this.listeners[key];
-
-		// Remove listeners
-		for (let i = 0, l; l = listeners && listeners[i]; i++) {
-			if (l == listener) listeners.splice(i--, 1);
-		}
+		return true;
 	}
 }

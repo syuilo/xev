@@ -16,17 +16,19 @@ $ npm install xev --save
 
 Usage
 ----------------------------------------------------------------
+It is the same as using [EventEmitter](https://nodejs.org/api/events.html).
+
 ### Simple usage
 ``` javascript
 import Xev from 'xev';
 
 const ev = new Xev();
 
-ev.sub('my-event', message => {
+ev.on('my-event', message => {
 	console.log(`message received: ${message}`);
 });
 
-ev.pub('my-event', 'yo'); // <= 'message received: yo'
+ev.emit('my-event', 'yo'); // <= 'message received: yo'
 ```
 
 ### On the cluster
@@ -54,6 +56,9 @@ Good luck, have fun.
 
 API
 ----------------------------------------------------------------
+Please see [EventEmitter](https://nodejs.org/api/events.html).
+In the following, we will describe the unique API of xev.
+
 ### new Xev(namespace?)
 If you are a library developer, we recommend setting namespace
 to avoid conflicts with events of users or other libraries:
@@ -65,26 +70,6 @@ const ev = new Xev('my-namespace');
 
 ### xev.mount()
 If you want to share events on the cluster, please call this method once in the master process.
-
-### xev.pub(type, data?)
-Execute all callback functions that listen to the given `type`.
-
-### xev.sub(type?, listener)
-Listen to the given `type` and execute the `listener` each time an event is triggered.
-``` javascript
-// listen to single event
-xev.sub('my-event', message => {
-	// something
-});
-
-// listen all the events
-xev.sub((event, message) => {
-	// something
-});
-```
-
-### xev.unsub(type?, listener)
-Removes the given callback listening to the `type`.
 
 License
 ----------------------------------------------------------------

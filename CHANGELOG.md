@@ -1,3 +1,7 @@
+2.0.0 / 2017-04-08
+------------------
+* The xev object is now an instance of EventEmitter.
+
 1.0.0 / 2017-04-07
 ------------------
 * Remove shortcuts

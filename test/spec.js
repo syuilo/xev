@@ -5,10 +5,10 @@ describe('Core specs', () => {
 	it('single listener', () => {
 		const ev = new Xev();
 
-		ev.sub('my-event', message => {
+		ev.once('my-event', message => {
 			assert.equal(message, 'strawberry pasta');
 		});
 
-		ev.pub('my-event', 'strawberry pasta');
+		ev.emit('my-event', 'strawberry pasta');
 	})
 });
