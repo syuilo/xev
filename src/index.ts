@@ -43,7 +43,7 @@ export default class Xev {
 				const worker = cluster.workers[id];
 				worker.send(message);
 			}
-		}
+		};
 
 		// When receiving a message from workers
 		cluster.on('message', (_, message) => broadcast(message));
