@@ -1,6 +1,8 @@
 xev
 ================================================================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/syuilo/xev.svg)](https://greenkeeper.io/)
+
 [![][npm-badge]][npm-link]
 [![][mit-badge]][mit]
 
