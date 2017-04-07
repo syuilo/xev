@@ -26,21 +26,6 @@ sub('my-event', message => {
 pub('my-event', 'yo'); // <= 'message received: yo'
 ```
 
-### With namespace
-If you are a library developer, we recommend setting namespace
-to avoid conflicts with events of users or other libraries:
-``` javascript
-import Xev from 'xev';
-
-const ev = new Xev('my-namespace');
-
-ev.sub('my-event', message => {
-	console.log(`message received: ${message}`);
-});
-
-ev.pub('my-event', 'yo'); // <= 'message received: yo'
-```
-
 ### On the cluster
 If you use the cluster, You must be call `mount` function at the master process. e.g.:
 ``` javascript
@@ -63,7 +48,16 @@ So, you must be call our `mount` initialize function.
 Good luck, have fun.
 
 API
-----------------------------------------------------------------
+---------------------------------------------------------------
+### new Xev(namespace?)
+If you are a library developer, we recommend setting namespace
+to avoid conflicts with events of users or other libraries:
+``` javascript
+import Xev from 'xev';
+
+const ev = new Xev('my-namespace');
+```
+
 ### xev.mount()
 If you want to share events on the cluster, please call this method once in the master process.
 
