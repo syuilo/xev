@@ -202,7 +202,3 @@ export default class Xev {
 		}
 	}
 }
-
-export const mount = new Xev().mount;
-export const pub = new Xev().pub;
-export const sub = new Xev().sub;

@@ -17,26 +17,30 @@ Usage
 ----------------------------------------------------------------
 ### Simple usage
 ``` javascript
-import { pub, sub } from 'xev';
+import Xev from 'xev';
 
-sub('my-event', message => {
+const ev = new Xev();
+
+ev.sub('my-event', message => {
 	console.log(`message received: ${message}`);
 });
 
-pub('my-event', 'yo'); // <= 'message received: yo'
+ev.pub('my-event', 'yo'); // <= 'message received: yo'
 ```
 
 ### On the cluster
 If you use the cluster, You must be call `mount` function at the master process. e.g.:
 ``` javascript
-import { isMaster, isWorker } from 'cluster';
-import { mount } from 'xev';
+import { isMaster } from 'cluster';
+import Xev from 'xev';
+
+const ev = new Xev();
 
 if (isMaster) {
 	// your master code
 
-	mount(); // Init xev
-} else if (isWorker) {
+	ev.mount(); // Init xev
+} else {
 	// your worker code
 }
 ```

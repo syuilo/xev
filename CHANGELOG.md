@@ -1,3 +1,7 @@
+1.0.0 / 2017-04-07
+------------------
+* Remove shortcuts
+
 0.2.0 / 2017-04-07
 ------------------
 * Implement the unsub method
