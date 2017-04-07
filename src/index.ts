@@ -130,7 +130,8 @@ export default class Xev {
 	 */
 	@autobind
 	public pub(type: string, data?: any): void {
-		const message = { type, data, namespace: this.namespace };
+		const message = { type, data,
+			namespace: this.namespace };
 
 		if (cluster.isMaster) {
 			process.emit('message', message);
