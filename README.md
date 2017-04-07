@@ -64,13 +64,13 @@ Good luck, have fun.
 
 API
 ----------------------------------------------------------------
-## xev.mount()
+### xev.mount()
 If you want to share events on the cluster, please call this method once in the master process.
 
-## xev.pub(type, data?)
+### xev.pub(type, data?)
 Execute all callback functions that listen to the given `type`.
 
-## xev.sub(type?, listener)
+### xev.sub(type?, listener)
 Listen to the given `type` and execute the `listener` each time an event is triggered.
 ``` javascript
 // listen to single event
@@ -84,7 +84,7 @@ xev.sub((event, message) => {
 });
 ```
 
-## xev.unsub(type?, listener) (TODO)
+### xev.unsub(type?, listener) (TODO)
 Removes the given callback listening to the `type`.
 
 License
