@@ -44,20 +44,20 @@ ev.pub('my-event', 'yo'); // <= 'message received: yo'
 ### On the cluster
 If you use the cluster, You must be call `mount` function at the master process. e.g.:
 ``` javascript
-import * as cluster from 'cluster';
+import { isMaster, isWorker } from 'cluster';
 import { mount } from 'xev';
 
-// Master
-if (cluster.isMaster) {
+if (isMaster) {
 	// your master code
 
 	mount(); // Init xev
-}
-// Workers
-else {
+} else if (isMaster) {
 	// your worker code
 }
 ```
+Technically, Node.js **cannot** workers to communicate directly
+with each other - all communication goes via the master.
+So, you must be call our `mount` initialize function.
 
 ### That is it.
 Good luck, have fun.
