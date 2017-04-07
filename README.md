@@ -5,7 +5,7 @@ xev
 [![][mit-badge]][mit]
 
 Global event system for [Node](https://github.com/nodejs/node).
-**It works well on cluster!** (Messaging between master and workers)
+**It works well on the cluster!** (Messaging between master and workers)
 
 Install
 ----------------------------------------------------------------
@@ -41,17 +41,17 @@ ev.sub('my-event', message => {
 ev.pub('my-event', 'yo'); // <= 'message received: yo'
 ```
 
-### On cluster
-If you use the cluster, You must be call `mount` function at master process. e.g.:
+### On the cluster
+If you use the cluster, You must be call `mount` function at the master process. e.g.:
 ``` javascript
 import * as cluster from 'cluster';
-import * as xev from 'xev';
+import { mount } from 'xev';
 
 // Master
 if (cluster.isMaster) {
 	// your master code
 
-	xev.mount(); // Init xev
+	mount(); // Init xev
 }
 // Workers
 else {
@@ -60,7 +60,7 @@ else {
 ```
 
 ### That is it.
-Good luck have fun.
+Good luck, have fun.
 
 License
 ----------------------------------------------------------------
