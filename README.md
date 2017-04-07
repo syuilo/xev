@@ -51,7 +51,7 @@ if (isMaster) {
 	// your master code
 
 	mount(); // Init xev
-} else if (isMaster) {
+} else if (isWorker) {
 	// your worker code
 }
 ```
