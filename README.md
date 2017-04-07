@@ -84,7 +84,7 @@ xev.sub((event, message) => {
 });
 ```
 
-### xev.unsub(type?, listener) (TODO)
+### xev.unsub(type?, listener)
 Removes the given callback listening to the `type`.
 
 License

@@ -1,3 +1,8 @@
+0.2.0 / 2017-04-07
+------------------
+* Implement the unsub method
+* Implement the dispose method
+
 0.1.3 / 2017-04-07
 ------------------
 * Fix bug
