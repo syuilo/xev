@@ -62,6 +62,31 @@ So, you must be call our `mount` initialize function.
 ### That is it.
 Good luck, have fun.
 
+API
+----------------------------------------------------------------
+## xev.mount()
+If you want to share events on the cluster, please call this method once in the master process.
+
+## xev.pub(type, data?)
+Execute all callback functions that listen to the given `type`.
+
+## xev.sub(type?, listener)
+Listen to the given `type` and execute the `listener` each time an event is triggered.
+``` javascript
+// listen to single event
+xev.sub('my-event', message => {
+	// something
+});
+
+// listen all the events
+xev.sub((event, message) => {
+	// something
+});
+```
+
+## xev.unsub(type?, listener) (TODO)
+Removes the given callback listening to the `type`.
+
 License
 ----------------------------------------------------------------
 [MIT](LICENSE)

@@ -17,7 +17,7 @@ export default class Xev {
 
 	/**
 	 * Init event emitter
-	 * @param namespace? Namespace
+	 * @param namespace Namespace
 	 */
 	constructor(namespace?: string) {
 		this.namespace = namespace;
@@ -54,7 +54,7 @@ export default class Xev {
 	 * @param type The name of the event
 	 * @param data The payload of the event
 	 */
-	public pub(type: string, data: any): void {
+	public pub(type: string, data?: any): void {
 		const message = { type, data, namespace: this.namespace };
 
 		if (cluster.isMaster) {
@@ -69,15 +69,24 @@ export default class Xev {
 	 * @param type     The name of the event
 	 * @param listener The callback function
 	 */
-	public sub(type: string, listener: (data: any) => any): void {
+	public sub(type: string, listener: (data: any) => any): void;
+
+	/**
+	 * Subscribe all events
+	 * @param listener The callback function
+	 */
+	public sub(listener: (type: string, data: any) => any): void;
+
+	public sub(x, y?): void {
 		process.on('message', message => {
 			// Ignore third party messages
 			if (message.namespace != this.namespace) return;
 
-			// Ignore other event
-			if (message.type != type) return;
-
-			listener(message.data);
+			if (typeof x == 'function') {
+				x(message.type, message.data);
+			} else if (message.type == x) {
+				y(message.data);
+			}
 		});
 	}
 }
