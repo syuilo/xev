@@ -2,6 +2,7 @@ xev
 ================================================================
 
 [![][npm-badge]][npm-link]
+[![][travis-badge]][travis-link]
 [![][mit-badge]][mit]
 
 Global event system for [Node](https://github.com/nodejs/node).
@@ -93,3 +94,5 @@ License
 [npm-badge]:       https://img.shields.io/npm/v/xev.svg?style=flat-square
 [mit]:             http://opensource.org/licenses/MIT
 [mit-badge]:       https://img.shields.io/badge/license-MIT-444444.svg?style=flat-square
+[travis-link]:    https://travis-ci.org/syuilo/xev
+[travis-badge]:   http://img.shields.io/travis/syuilo/xev.svg?style=flat-square

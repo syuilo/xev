@@ -13,12 +13,18 @@
   "bugs": "https://github.com/syuilo/xev/issues",
   "main": "./built/index.js",
   "types": "./built/index.d.ts",
+  "scripts": {
+    "build": "gulp build",
+    "test": "mocha --harmony"
+  },
   "devDependencies": {
     "@types/event-stream": "3.3.31",
     "@types/gulp": "4.0.2",
     "@types/gulp-typescript": "0.0.33",
+    "@types/mocha": "2.2.40",
     "event-stream": "3.3.4",
     "gulp": "3.9.1",
-    "gulp-typescript": "3.1.6"
+    "gulp-typescript": "3.1.6",
+    "mocha": "3.2.0"
   }
 }
