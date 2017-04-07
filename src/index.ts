@@ -34,12 +34,7 @@ export default class Xev {
 			throw 'Do not call this method in a worker process.';
 		}
 
-		// When receiving a message from workers
-		cluster.on('message', (_, message) => broadcast(message));
-		// When receiving a message from the master
-		process.on('message', broadcast.bind(this));
-
-		function broadcast(message) {
+		const broadcast = message => {
 			// Ignore third party messages
 			if (message.namespace != this.namespace) return;
 
@@ -49,6 +44,12 @@ export default class Xev {
 				worker.send(message);
 			}
 		}
+
+		// When receiving a message from workers
+		cluster.on('message', (_, message) => broadcast(message));
+
+		// When receiving a message from the master
+		process.on('message', broadcast);
 	}
 
 	/**
@@ -86,9 +87,12 @@ export default class Xev {
 			// Ignore third party messages
 			if (message.namespace != this.namespace) return;
 
+			// When listen to all events
 			if (typeof x == 'function') {
 				x(message.type, message.data);
-			} else if (message.type == x) {
+			}
+			// When event name specified
+			else if (message.type == x) {
 				y(message.data);
 			}
 		});
