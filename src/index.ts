@@ -84,8 +84,7 @@ export default class Xev extends EventEmitter {
 
 	@autobind
 	private onClusterMessageInMaster(sender, message) {
-		this.onMessage(message);
-		this.broadcast(message);
+		process.emit('message', message);
 	}
 
 	@autobind
