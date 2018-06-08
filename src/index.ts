@@ -84,7 +84,7 @@ export default class Xev extends EventEmitter {
 
 	@autobind
 	private onClusterMessageInMaster(sender, message) {
-		process.emit('message', message);
+		process.emit('message', message, null);
 	}
 
 	@autobind
@@ -120,7 +120,7 @@ export default class Xev extends EventEmitter {
 			namespace: this.namespace };
 
 		if (cluster.isMaster) {
-			process.emit('message', message);
+			process.emit('message', message, null);
 		} else {
 			process.send(message);
 		}

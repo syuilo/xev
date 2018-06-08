@@ -1,6 +1,6 @@
 {
   "name": "xev",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Global event emitter",
   "keywords": [
     "event",
@@ -14,17 +14,12 @@
   "main": "./built/index.js",
   "types": "./built/index.d.ts",
   "scripts": {
-    "build": "gulp build",
+    "build": "tsc",
     "test": "mocha --harmony"
   },
   "devDependencies": {
-    "@types/event-stream": "3.3.31",
-    "@types/gulp": "4.0.2",
-    "@types/gulp-typescript": "0.0.33",
     "@types/mocha": "2.2.40",
-    "event-stream": "3.3.4",
-    "gulp": "3.9.1",
-    "gulp-typescript": "3.1.6",
+    "@types/node": "10.3.2",
     "mocha": "3.2.0",
     "typescript": "2.2.2"
   }

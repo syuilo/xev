@@ -1,3 +1,7 @@
+2.0.1 / 2018-06-09
+------------------
+* Bug fix
+
 2.0.0 / 2017-04-08
 ------------------
 * The xev object is now an instance of EventEmitter.

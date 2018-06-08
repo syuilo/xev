@@ -7,7 +7,7 @@
 		"experimentalDecorators": true,
 		"declaration": true,
 		"sourceMap": false,
-		"target": "es6",
+		"target": "es2017",
 		"module": "commonjs",
 		"removeComments": false,
 		"noLib": false,
@@ -16,7 +16,6 @@
 	},
 	"compileOnSave": false,
 	"include": [
-		"./node_modules/typescript/lib/lib.es6.d.ts",
 		"./src/**/*.ts"
 	]
 }
