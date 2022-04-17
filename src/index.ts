@@ -6,7 +6,7 @@
 
 import { EventEmitter } from 'node:events';
 import cluster from 'node:cluster';
-import autobind from './autobind';
+import autobind from './autobind.js';
 
 /**
  * Global Event Emitter
