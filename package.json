@@ -1,6 +1,6 @@
 {
   "name": "xev",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Global event emitter",
   "keywords": [
     "event",
@@ -13,6 +13,7 @@
   "bugs": "https://github.com/syuilo/xev/issues",
   "main": "./built/index.js",
   "types": "./built/index.d.ts",
+	"type": "module",
   "scripts": {
     "build": "tsc",
     "test": "mocha"
